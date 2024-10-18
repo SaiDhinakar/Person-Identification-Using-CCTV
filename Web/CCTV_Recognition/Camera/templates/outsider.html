@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outsiders Detection</title>
+    <link rel="stylesheet" href="{% static 'CSS/css_all.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; 
+            z-index: 1; /* Stay on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 600px;  /* Set the width to 600px */
+            height: 400px; /* Set the height to 400px */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content img {
+            width: 100%; /* Image will fit within the modal dimensions */
+            height: 100%;
+            object-fit: cover; /* Maintain aspect ratio and cover the entire modal area */
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Outsiders Detection</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Detection Section for Outsiders -->
+        <section class="detection-section">
+            <h2>Detected Outsiders</h2>
+            
+            <!-- Detected Outsiders Table -->
+            <table id="outsidersTable" class="detection-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody id="outsidersTableBody">
+                    <!-- Dynamic rows will be added here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Links to Home and ID Card Detection -->
+        <section class="links">
+            <a href="{% url 'home' %}" class="button">Home</a>
+            <a href="{% url 'IDdetection' %}" class="button">Non-ID Card Holder's Detection</a>
+        </section>
+    </main>
+
+    <!-- Fullscreen Image Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content" id="modalContent">
+            <img id="modalImage" src="" alt="Full Image">
+        </div>
+    </div>
+
+    <script>
+        // Function to dynamically add a new outsider detection to the table
+        function addOutsider(imageSrc, time, location) {
+            const tableBody = document.getElementById('outsidersTableBody');
+            
+            // Create a new table row
+            const newRow = document.createElement('tr');
+
+            // Create image cell
+            const imageCell = document.createElement('td');
+            const img = document.createElement('img');
+            img.src = "down.jpg"; // Image source
+            img.alt = 'Outsider Image';
+            img.style.width = '100px'; // Adjust image size
+            img.classList.add('clickable-image'); // Add a class for click event
+            imageCell.appendChild(img);
+
+            // Create time cell
+            const timeCell = document.createElement('td');
+            timeCell.textContent = time;
+
+            // Create location cell
+            const locationCell = document.createElement('td');
+            locationCell.textContent = location;
+
+            // Append all cells to the new row
+            newRow.appendChild(imageCell);
+            newRow.appendChild(timeCell);
+            newRow.appendChild(locationCell);
+
+            // Add the new row to the table body
+            tableBody.appendChild(newRow);
+
+            // Add click event listener to the image to open in modal
+            img.addEventListener('click', () => {
+                openModal(imageSrc);
+            });
+        }
+
+        // Example of adding a new outsider dynamically (this would be replaced with real-time detection logic)
+        setTimeout(() => {
+            addOutsider('outsider1.jpg', '10:30 AM', 'Main Gate');
+        }, 3000); // Add after 3 seconds for demo purposes
+
+        // Modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        // Function to open the modal
+        function openModal(imageSrc) {
+            modalImage.src = "down.jpg";
+            modal.style.display = 'flex'; // Show the modal
+        }
+
+        // Function to close the modal when clicking outside the image
+        modal.addEventListener('click', (e) => {
+            if (e.target !== modalImage) {
+                modal.style.display = 'none'; // Close the modal
+            }
+        });
+
+    </script>
+
+</body>
+</html>
