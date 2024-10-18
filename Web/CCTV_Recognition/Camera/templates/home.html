@@ -5,99 +5,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sri Shakthi Institute of Engineering and Technology</title>
-    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
-    <!-- C:\Users\SAI\Desktop\Files\Person-Identification-Using-CCTV\Web\CCTV_Recognition\Camera\static\CSS\style.css -->
+
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Add Tailwind CSS for additional styling -->
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Custom Hero Section Styling */
+        header {
+            /* background: linear-gradient(90deg, rgba(0, 128, 0, 0.8), rgba(255, 255, 255, 0.7)); */
+            /* color: white; */
+            padding: 10px 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748; /* Tailwind Color */
+        }
+
+        .modal-body {
+            background-color: #f8f9fa; /* Light background for modal */
+        }
+
+        .camera-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .camera {
+            background-color: #e2e8f0; /* Light background color for camera */
+            padding: 20px;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .camera:hover {
+            transform: translateY(-10px);
+        }
+
+        .modal-header {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <!-- Logo -->
-            <div class="logo">
-                <img src="{% static 'assets/logo 3.jpg' %}" alt="Sri Shakthi Logo">
-            </div>
-            <!-- Institute Info -->
-            <div class="institute-info">
-                <h1>SRI SHAKTHI INSTITUTE OF ENGINEERING AND TECHNOLOGY</h1>
-                <p>Approved by AICTE, New Delhi • Affiliated to Anna University, Chennai</p>
-                <p>An Autonomous Institution</p>
+    <!-- Bootstrap Header Section -->
+    <header class="bg-light py-3 border-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Logo -->
+                <div class="col-md-2 text-center text-md-left">
+                    <img src="{% static 'assets/logo 3.jpg' %}" alt="Sri Shakthi Logo" class="img-fluid">
+                </div>
+                <!-- Institute Info -->
+                <div class="col-md-10">
+                    <h1 class="h3 text-success font-weight-bold">SRI SHAKTHI INSTITUTE OF ENGINEERING AND TECHNOLOGY</h1>
+                    <p class="text-muted mb-1">Approved by AICTE, New Delhi • Affiliated to Anna University, Chennai</p>
+                    <p class="text-muted">An Autonomous Institution</p>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <!-- Camera Grid -->
-        <section class="camera-section">
-            <h2>All Cameras</h2>
-            <div class="camera-grid" id="cameraGrid">
-                <div class="camera" id="camera1" onclick="openCamera(1)">Camera 1</div>
-                <div class="camera" id="camera2" onclick="openCamera(2)">Camera 2</div>
-                <div class="camera" id="camera3" onclick="openCamera(3)">Camera 3</div>
-                <div class="camera" id="camera4" onclick="openCamera(4)">Camera 4</div>
-                <div class="camera" id="camera5" onclick="openCamera(5)">Camera 5</div>
-                <div class="camera" id="camera6" onclick="openCamera(6)">Camera 6</div>
-                <div class="camera" id="camera7" onclick="openCamera(7)">Camera 7</div>
-                <div class="camera" id="camera8" onclick="openCamera(8)">Camera 8</div>
-                <div class="camera" id="camera9" onclick="openCamera(9)">Camera 9</div>
-                <div class="camera" id="camera10" onclick="openCamera(10)">Camera 10</div>
-                <div class="camera" id="camera11" onclick="openCamera(11)">Camera 11</div>
-                <div class="camera" id="camera12" onclick="openCamera(12)">Camera 12</div>
-                <div class="camera" id="camera13" onclick="openCamera(13)">Camera 13</div>
-                <div class="camera" id="camera14" onclick="openCamera(14)">Camera 14</div>
-                <div class="camera" id="camera15" onclick="openCamera(15)">Camera 15</div>
-                <div class="camera" id="camera16" onclick="openCamera(16)">Camera 16</div>
-                <div class="camera" id="camera17" onclick="openCamera(17)">Camera 17</div>
-                <div class="camera" id="camera18" onclick="openCamera(18)">Camera 18</div>
-                <div class="camera" id="camera19" onclick="openCamera(19)">Camera 19</div>
-                <div class="camera" id="camera20" onclick="openCamera(20)">Camera 20</div>
-                <div class="camera" id="camera21" onclick="openCamera(21)">Camera 21</div>
-                <div class="camera" id="camera22" onclick="openCamera(22)">Camera 22</div>
-                <div class="camera" id="camera23" onclick="openCamera(23)">Camera 23</div>
-                <div class="camera" id="camera24" onclick="openCamera(24)">Camera 24</div>
-                <div class="camera" id="camera25" onclick="openCamera(25)">Camera 25</div>
-                <div class="camera" id="camera26" onclick="openCamera(26)">Camera 26</div>
-                <div class="camera" id="camera27" onclick="openCamera(27)">Camera 27</div>
-                <div class="camera" id="camera28" onclick="openCamera(28)">Camera 28</div>
-                <div class="camera" id="camera29" onclick="openCamera(29)">Camera 29</div>
-                <div class="camera" id="camera30" onclick="openCamera(30)">Camera 30</div>
-                <div class="camera" id="camera31" onclick="openCamera(31)">Camera 31</div>
-                <div class="camera" id="camera32" onclick="openCamera(32)">Camera 32</div>
-                <div class="camera" id="camera33" onclick="openCamera(33)">Camera 33</div>
-                <div class="camera" id="camera34" onclick="openCamera(34)">Camera 34</div>
-                <div class="camera" id="camera35" onclick="openCamera(35)">Camera 35</div>
-                <div class="camera" id="camera36" onclick="openCamera(36)">Camera 36</div>
-                <div class="camera" id="camera37" onclick="openCamera(37)">Camera 37</div>
-                <div class="camera" id="camera38" onclick="openCamera(38)">Camera 38</div>
-                <div class="camera" id="camera39" onclick="openCamera(39)">Camera 39</div>
-                <div class="camera" id="camera40" onclick="openCamera(40)">Camera 40</div>
-                <div class="camera" id="camera41" onclick="openCamera(41)">Camera 41</div>
-                <div class="camera" id="camera42" onclick="openCamera(42)">Camera 42</div>
-                <div class="camera" id="camera43" onclick="openCamera(43)">Camera 43</div>
-                <div class="camera" id="camera44" onclick="openCamera(44)">Camera 44</div>
-                <div class="camera" id="camera45" onclick="openCamera(45)">Camera 45</div>
-                <div class="camera" id="camera46" onclick="openCamera(46)">Camera 46</div>
-                <div class="camera" id="camera47" onclick="openCamera(47)">Camera 47</div>
-                <div class="camera" id="camera48" onclick="openCamera(48)">Camera 48</div>
-                <div class="camera" id="camera49" onclick="openCamera(49)">Camera 49</div>
-                <div class="camera" id="camera50" onclick="openCamera(50)">Camera 50</div>
-            
-            </div>
-        </section>
-    </main>
-
-    <!-- Links to Outsiders and ID Card Detection Pages (Fixed at Bottom) -->
-    <section class="links">
-        <a href="{% url 'outsiders' %}" class="button">Outsider's Detected</a>
-        <a href="{% url 'IDdetection' %}" class="button">Non-ID Card Holder's</a>
-    </section>
-
-    <!-- Fullscreen Camera Modal -->
-    <div id="cameraModal" class="modal">
-        <span class="close" onclick="closeCamera()">&times;</span>
-        <div class="modal-content" id="modalCameraContent"></div>
+    <!-- Camera Grid Section -->
+    <div class="container my-4">
+        <h2 class="text-center text-success mb-4">Live Camera Streams</h2>
+        <div id="cameraGrid" class="camera-grid"></div>
     </div>
 
+    <!-- Modal for Full-Screen Video -->
+    <div id="cameraModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Live Camera Feed</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalCameraContent" class="modal-body text-center">
+                    <!-- Video stream will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Footer Section -->
+    <footer class="mt-4">
+        <div class="container">
+            <p>&copy; 2024 Sri Shakthi Institute of Engineering and Technology. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
     <script src="{% static 'JS/home.js' %}"></script>
 </body>
 </html>

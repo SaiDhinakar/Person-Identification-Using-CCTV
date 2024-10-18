@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name = 'home'),
     path('outsiders/', views.outsiders, name = 'outsiders'),
-    path('Id-detection/', views.id_detection, name = 'IDdetection'),
+    path('video_feed/<int:camera_id>/', views.video_feed, name='video_feed'),
 ]

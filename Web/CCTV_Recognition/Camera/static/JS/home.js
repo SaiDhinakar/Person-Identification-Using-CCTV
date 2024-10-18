@@ -1,19 +1,28 @@
-// Dynamically generate cameras in the grid with a limit of 9 at a time and load more on scroll
 window.onload = function() {
     const cameraGrid = document.getElementById('cameraGrid');
     let totalCameras = 50;  
     let camerasPerPage = 9; 
-    let camerasDisplayed = 53;
+    let camerasDisplayed = 0;
 
     // Function to load cameras in batches of 9
     function loadCameras() {
         let camerasToLoad = Math.min(totalCameras - camerasDisplayed, camerasPerPage);
-        for (let i = 1; i <= camerasToLoad; i++) {
+        for (let i = 0; i < camerasToLoad; i++) {
+            const cameraId = camerasDisplayed + i;
             const cameraDiv = document.createElement('div');
-            cameraDiv.classList.add('camera');
-            cameraDiv.setAttribute('id', 'camera' + (camerasDisplayed + i));
-            cameraDiv.setAttribute('onclick', `openCamera('Camera ${camerasDisplayed + i}')`);
-            cameraDiv.innerHTML = `Camera ${camerasDisplayed + i}`;
+            cameraDiv.classList.add('col-md-4', 'mb-4'); // Bootstrap grid for 3 cameras per row
+            cameraDiv.setAttribute('id', 'camera' + cameraId);
+            cameraDiv.setAttribute('onclick', `openCamera(${cameraId})`);
+
+            // Dynamically load video stream from backend for each camera
+            cameraDiv.innerHTML = `
+                <div class="card" style='width : 350px; height:180px;'>
+                    <img id="video${cameraId}" class="card-img-top" src="/video_feed/${cameraId}" alt="Camera ${cameraId} Live Feed" style="height: 180px;">
+                    <div class="card-body text-center">
+                        <p class="card-text">Camera ${cameraId}</p>
+                    </div>
+                </div>
+            `;
             cameraGrid.appendChild(cameraDiv);
         }
         camerasDisplayed += camerasToLoad;
@@ -30,16 +39,20 @@ window.onload = function() {
     });
 };
 
-// Function to open the camera in full screen
-function openCamera(cameraName) {
-    const modal = document.getElementById('cameraModal');
+// Function to open the camera in full screen and play the video stream using Bootstrap modal
+function openCamera(cameraId) {
     const modalContent = document.getElementById('modalCameraContent');
-    modal.style.display = 'flex';
-    modalContent.innerHTML = `<h2>${cameraName} - Live Stream.....</h2><p>Displaying live stream of ${cameraName}.</p>`;
+
+    // Use image tag to display full-screen live stream in the modal
+    modalContent.innerHTML = `
+        <img id="video${cameraId}-fullscreen" class="img-fluid" src="/video_feed/${cameraId}" alt="Camera ${cameraId} Live Feed w">
+    `;
+
+    // Show the Bootstrap modal
+    $('#cameraModal').modal('show');
 }
 
 // Function to close the full screen camera view
 function closeCamera() {
-    const modal = document.getElementById('cameraModal');
-    modal.style.display = 'none';
+    $('#cameraModal').modal('hide');  // Use Bootstrap modal hide method
 }
