@@ -6,7 +6,7 @@ window.onload = function() {
 
     // Function to load cameras in batches of 9
     function loadCameras() {
-        let camerasToLoad = Math.min(totalCameras - camerasDisplayed, camerasPerPage);
+        let camerasToLoad = 50;//Math.min(totalCameras - camerasDisplayed, camerasPerPage);
         for (let i = 0; i < camerasToLoad; i++) {
             const cameraId = camerasDisplayed + i;
             const cameraDiv = document.createElement('div');

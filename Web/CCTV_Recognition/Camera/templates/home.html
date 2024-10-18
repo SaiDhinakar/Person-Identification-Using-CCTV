@@ -30,6 +30,9 @@
         .modal-body {
             background-color: #f8f9fa; /* Light background for modal */
         }
+        .modal {
+            z-index: 1050; /* Higher than other elements on the page */
+        }
 
         .camera-grid {
             display: grid;
@@ -55,16 +58,53 @@
             background-color: #4CAF50;
             color: white;
         }
-
-        footer {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            position: sticky;
-            bottom: 0;
-            width: 100%;
+        a{
+            text-decoration: none;
         }
+        /* Footer Section Styling */
+footer {
+    background-color: #4CAF50; /* Dark green background */
+    color: white; /* White text for contrast */
+    text-align: center; /* Centered text */
+    padding: 20px 0; /* Padding for spacing */
+    position: relative; /* Allows for other positioned elements */
+    z-index: 100; /* Keeps footer above other content */
+}
+
+.urls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    bottom: 50;
+    background-color: #f8f9fa;
+    width: 100%;
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Center items horizontally */
+    margin-bottom: 10px; /* Space between links and copyright text */
+    text-decoration: none;
+}
+.button {
+    background-color: #13980e; /* Button background color */
+    color: white; /* Button text color */
+    padding: 10px 20px; /* Button padding */
+    text-decoration: none; /* Remove underline */
+    font-size: 1rem; /* Font size */
+    border-radius: 5px; /* Rounded corners */
+    margin: 0 10px; /* Space between buttons */
+    transition: background-color 0.3s ease; /* Smooth background color change */
+}
+
+.button:hover {
+    background-color: #117a0e; /* Darker green on hover */
+}
+
+footer p {
+    margin: 0; /* Remove default margin */
+    font-size: 0.9rem; /* Slightly smaller font size for copyright */
+}
+
     </style>
 </head>
 <body>
@@ -74,7 +114,7 @@
             <div class="row align-items-center">
                 <!-- Logo -->
                 <div class="col-md-2 text-center text-md-left">
-                    <img src="{% static 'assets/logo 3.jpg' %}" alt="Sri Shakthi Logo" class="img-fluid">
+                    <img src="{% static 'assets/logo 3.jpg' %}" alt="Sri Shakthi Logo" class="img-fluid" height="100px" width="100px">
                 </div>
                 <!-- Institute Info -->
                 <div class="col-md-10">
@@ -92,29 +132,37 @@
         <div id="cameraGrid" class="camera-grid"></div>
     </div>
 
-    <!-- Modal for Full-Screen Video -->
-    <div id="cameraModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Live Camera Feed</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div id="modalCameraContent" class="modal-body text-center">
-                    <!-- Video stream will be loaded here -->
+    <!-- Modal for full-screen camera view -->
+<div class="modal fade" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- Modal Title -->
+                        <h5 class="modal-title" id="cameraModalLabel">Camera Full View</h5>
+                        
+                        <!-- Close icon in top-right corner -->
+                        <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="modalCameraContent">
+                        <!-- Fullscreen video will be injected here dynamically -->
+                    </div>
                 </div>
             </div>
-        </div>
+            </div>
+    
+    <!-- Navigation to other pages button -->
+    <div class="urls">
+        <a href="{% url 'outsiders' %}" class="button">Outsider's Detection</a>
+        <a href="{% url 'IDdetection' %}" class="button">Non-ID Card Holder's Detection</a>
     </div>
+    
+   <!-- Footer Section -->
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Sri Shakthi Institute of Engineering and Technology. All Rights Reserved.</p>
+    </div>
+</footer>
 
-    <!-- Footer Section -->
-    <footer class="mt-4">
-        <div class="container">
-            <p>&copy; 2024 Sri Shakthi Institute of Engineering and Technology. All Rights Reserved.</p>
-        </div>
-    </footer>
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
